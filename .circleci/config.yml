@@ -1,0 +1,97 @@
+version: 2.1
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Orbs
+# ──────────────────────────────────────────────────────────────────────────────
+orbs:
+  python: circleci/python@2.1.1
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Reusable defaults
+# ──────────────────────────────────────────────────────────────────────────────
+defaults: &defaults
+  docker:
+    - image: cimg/python:3.12
+  working_directory: ~/repo
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Jobs
+# ──────────────────────────────────────────────────────────────────────────────
+jobs:
+  # --------------------------------------------------------------------------
+  # Job 1 – Linting (flake8)
+  # --------------------------------------------------------------------------
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - pip-deps-v1-{{ checksum "requirements-dev.txt" }}
+            - pip-deps-v1-
+
+      - run:
+          name: Install dev dependencies
+          command: pip install -r requirements-dev.txt
+
+      - save_cache:
+          key: pip-deps-v1-{{ checksum "requirements-dev.txt" }}
+          paths:
+            - ~/.cache/pip
+
+      - run:
+          name: Run flake8 linter
+          command: flake8 src/ tests/
+
+  # --------------------------------------------------------------------------
+  # Job 2 – Unit tests (pytest + coverage)
+  # --------------------------------------------------------------------------
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - pip-deps-v1-{{ checksum "requirements-dev.txt" }}
+            - pip-deps-v1-
+
+      - run:
+          name: Install dev dependencies
+          command: pip install -r requirements-dev.txt
+
+      - save_cache:
+          key: pip-deps-v1-{{ checksum "requirements-dev.txt" }}
+          paths:
+            - ~/.cache/pip
+
+      - run:
+          name: Run pytest with coverage
+          command: pytest
+
+      - store_test_results:
+          # CircleCI parses JUnit XML from this path for the "Tests" tab
+          path: test-results
+
+      - store_artifacts:
+          path: coverage.xml
+          destination: coverage-report
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Workflows
+# ──────────────────────────────────────────────────────────────────────────────
+workflows:
+  # Runs on every push — covers both PRs and the master branch
+  ci:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only: /.*/        # all branches, including master
+      - test:
+          filters:
+            branches:
+              only: /.*/
+          requires:
+            - lint             # don't bother running tests if lint fails
