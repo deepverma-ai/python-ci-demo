@@ -45,6 +45,8 @@ class TestMultiply:
 
     def test_mixed_sign(self):
         assert multiply(-2, 3) == -6
+        assert multiply(-2, 4) == -8
+    
 
 
 class TestDivide:
