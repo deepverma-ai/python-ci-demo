@@ -48,7 +48,6 @@ class TestMultiply:
         assert multiply(-2, 4) == -8
     
 
-
 class TestDivide:
     def test_exact_division(self):
         assert divide(10, 2) == 5.0
