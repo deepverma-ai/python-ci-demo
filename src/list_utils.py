@@ -25,3 +25,9 @@ def flatten_list(nested_list: list) -> list:
 
 def count_occurrences(items: list, value) -> int:
     return items.count(value)
+
+
+def find_min(items: list) -> int:
+    if not items:
+        raise ValueError("List cannot be empty")
+    return min(items)
