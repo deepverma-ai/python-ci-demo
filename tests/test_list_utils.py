@@ -1,5 +1,5 @@
 import pytest
-from list_utils import remove_duplicates, find_max, flatten_list, count_occurrences
+from src.list_utils import remove_duplicates, find_max, flatten_list, count_occurrences
 
 
 def test_remove_duplicates():
