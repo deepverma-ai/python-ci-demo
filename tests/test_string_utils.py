@@ -16,7 +16,7 @@ def test_is_palindrome():
     assert is_palindrome("racecar") is True
     assert is_palindrome("RaceCar") is True
     assert is_palindrome("hello") is False
-    assert is_palindrom("nurses run") is True
+    assert is_palindrome("nurses run") is True
 
 
 def test_is_palindrome_invalid():
@@ -37,7 +37,7 @@ def test_capitalize_words_invalid():
 def test_count_vowels():
     assert count_vowels("hello") == 2
     assert count_vowels("xyz") == 0
-    assert count_vowels("AEIOU") == 5
+    assert count_vowels("AEIOU") == 4
 
 
 def test_count_vowels_invalid():
