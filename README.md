@@ -5,7 +5,7 @@ protection rules, and automated quality gates.
 
 ## Tech Stack
 
-- **Language**: Python 3.12
+- **Language**: Python 3.14
 - **Linter**: flake8
 - **Testing**: pytest + pytest-cov
 - **CI**: CircleCI
@@ -54,13 +54,18 @@ Configure these rules on `master` under **Settings → Branches**:
 ```
 .
 ├── .circleci/
-│   └── config.yml       # CircleCI pipeline definition
+│   └── config.yml          # CircleCI pipeline definition
 ├── src/
-│   └── calculator.py    # Sample Python module
+│   ├── calculator.py       # Basic arithmetic operations
+│   └── list_utils.py       # List manipulation utilities
 ├── tests/
-│   └── test_calculator.py
-├── .flake8              # Linter configuration
-├── requirements.txt     # Runtime dependencies
-├── requirements-dev.txt # Dev/CI dependencies
-└── setup.cfg            # pytest configuration
+│   ├── test_calculator.py
+│   └── test_list_utils.py
+├── .flake8                 # Linter configuration
+├── .gitignore              # Git ignore rules
+├── CI_Pipeline_Documentation.pdf # Comprehensive pipeline documentation
+├── requirements.txt        # Runtime dependencies
+├── requirements-dev.txt    # Dev/CI dependencies
+└── setup.cfg               # pytest configuration
 ```
+
