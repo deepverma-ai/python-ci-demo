@@ -16,7 +16,7 @@ def test_is_palindrome():
     assert is_palindrome("racecar") is True
     assert is_palindrome("RaceCar") is True
     assert is_palindrome("hello") is False
-    assert is_palindrome("nurses run") is True
+    assert is_palindrom("nurses run") is True
 
 
 def test_is_palindrome_invalid():
