@@ -68,4 +68,3 @@ Configure these rules on `master` under **Settings → Branches**:
 ├── requirements-dev.txt    # Dev/CI dependencies
 └── setup.cfg               # pytest configuration
 ```
-
