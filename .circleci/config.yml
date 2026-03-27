@@ -76,7 +76,11 @@ jobs:
 
       - store_artifacts:
           path: coverage.xml
-          destination: coverage-report
+          destination: coverage-report-xml
+
+      - store_artifacts:
+          path: htmlcov
+          destination: coverage-report-html
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Workflows

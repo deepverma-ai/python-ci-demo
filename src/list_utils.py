@@ -25,3 +25,26 @@ def flatten_list(nested_list: list) -> list:
 
 def count_occurrences(items: list, value) -> int:
     return items.count(value)
+
+
+def find_min(items: list) -> int:
+    if not items:
+        raise ValueError("List cannot be empty")
+    return min(items)
+
+
+def filter_and_transform(items: list, threshold: int) -> list:
+    """A more complex function to drop coverage further."""
+    if not isinstance(items, list):
+        return []
+
+    result: list = []
+    for x in items:
+        if isinstance(x, (int, float)):
+            if x > threshold:
+                result.append(x * 10)
+            else:
+                result.append(x / 10)
+        else:
+            result.append(str(x))
+    return result
